@@ -3,18 +3,20 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ThemeProvider } from 'emotion-theming'
 import theme from '@rebass/preset'
+import Context from './stores/context';
+import rootStore from './stores/rootStore';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Context.Provider value={rootStore}>
     <Router>
       <ThemeProvider theme={theme}>
         <App />
       </ThemeProvider>
     </Router>
-  </React.StrictMode>,
+  </Context.Provider>,
   document.getElementById('root')
 );
 

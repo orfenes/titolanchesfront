@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { Box, Button } from 'rebass';
 import { Redirect } from 'react-router-dom';
+import Context from '../../stores/context';
 import { Input, Label } from '../../components';
 
 class Login extends Component {
+  static contextType = Context;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -14,7 +17,12 @@ class Login extends Component {
   }
 
   login() {
-    this.setState({login: true});
+    const {
+      sessionStore,
+    } = this.context;
+
+    sessionStore.teste();
+    // this.setState({login: true});
   }
 
   render() {

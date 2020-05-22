@@ -1,25 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route } from 'react-router-dom';
+import { Flex } from 'rebass'
+import Login from './views/Login/Login';
+import ListClient from './views/ListClient/ListClient';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Flex flexWrap='wrap' justifyContent="center">
+      <Route exact path="/" component={Login} />
+      <Route exact path="/list-client" component={ListClient} />
+    </Flex>
   );
 }
 

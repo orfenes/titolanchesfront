@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Text } from 'rebass';
 import { Redirect } from 'react-router-dom';
 import Context from '../../stores/context';
-import { Input, LoginStyle } from '../../components';
+import { Input, LoginStyle } from '../../style';
 
 
 class Login extends Component {
@@ -30,7 +30,6 @@ class Login extends Component {
 
     sessionStore.doRequestLogin(email, password)
       .then(() => {
-        console.log('logdo com sucesso');
         this.setState({login: true});
       })
       .catch((error) => {
@@ -58,7 +57,7 @@ class Login extends Component {
     } = this.context;
 
     if(this.state.login || sessionStore.auth) {
-      return <Redirect to="/list-client" />;
+      return <Redirect to="/client" />;
     }
 
     return (

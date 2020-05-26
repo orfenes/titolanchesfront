@@ -2,13 +2,15 @@ import React, { Fragment, useContext } from 'react';
 import { Route } from 'react-router-dom';
 import { observer } from 'mobx-react';
 import Login from './views/Login/Login';
-import ListClient from './views/ListClient/ListClient';
+import Client from './views/Client/Client';
 import Context from './stores/context';
 import {
   PrivateRoute,
   Header,
-  Main,
 } from './components'
+import {
+  Main,
+} from './style';
 
 const App = () => {
   const context = useContext(Context);
@@ -24,7 +26,7 @@ const App = () => {
       <Header />
       <Main>
         <Route exact path="/" component={Login} />
-        <PrivateRoute exact path="/list-client" component={ListClient} />
+        <PrivateRoute exact path="/client" component={Client} />
       </Main>
     </Fragment>
   );

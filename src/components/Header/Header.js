@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import Context from '../../stores/context';
 import {
   Flex,
   Text,
@@ -17,6 +18,19 @@ const HeaderStyle = styled(Flex)`
 `;
 
 const Header = () => {
+  const context = useContext(Context);
+  const {
+    sessionStore
+  } = context;
+
+  const renderName = () => {
+    if(sessionStore.auth) {
+      return 'TitoLanches';
+    }
+
+    return 'Login';
+  }
+
   return(
     <HeaderStyle
       px={2}
@@ -24,7 +38,7 @@ const Header = () => {
       bg='#07c'
       alignItems='center'>
       <Text p={2} fontWeight='bold' className="text-login">
-        Login
+        {renderName()}
       </Text>
       <Box mx='auto' />
     </HeaderStyle>

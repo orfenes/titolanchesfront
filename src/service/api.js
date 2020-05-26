@@ -1,7 +1,7 @@
 import request from './request';
 
-const host = 'http://localhost:3000';
-const apiRoute = '/api';
+const host = 'http://localhost:3003';
+const apiRoute = 'oapi';
 const path = `${host}/${apiRoute}`;
 
 export const login = params => (

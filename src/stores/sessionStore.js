@@ -1,38 +1,47 @@
-import { action, decorate } from 'mobx';
-// import { login } from '../services/api';
+import { action, decorate, observable } from 'mobx';
+import { login as loginApi } from '../service/api';
 
 class SessionStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
-    this.session = {};
+    this.token = false;
+    this.auth = false;
   }
 
-  teste() {
-    console.log('cheguei ate aqui');
+  doRequestLogin( email, password ) {
+    const data = {
+      email,
+      password,
+    };
+
+    const promiseLogin = async (resolve, reject) => {
+      try {
+        const res = await loginApi(data);
+        this.setAllowed(res.data.token);
+        resolve(res.data);
+      } catch (err) {
+        reject(err);
+      }
+    };
+
+    return new Promise((resolve, reject) => promiseLogin(resolve, reject));
+  }
+
+  setAllowed(token) {
+    this.token = token;
     this.auth = true;
   }
 }
 
 decorate(SessionStore, {
-  teste: action,
+  auth: observable,
+  setAllowed: action,
+  doRequestLogin: action,
 });
 
 export const SessionSchema = {
   auth: true,
   token: true,
-  session: {
-    type: 'object',
-    schema: {
-      name: true,
-      location: {
-        type: 'object',
-        schema: {
-          name: true,
-        },
-      },
-    },
-  },
-  tabSelected: true,
 };
 
 export default SessionStore;

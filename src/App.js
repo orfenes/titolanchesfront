@@ -1,16 +1,33 @@
-import React from 'react';
+import React, { Fragment, useContext } from 'react';
 import { Route } from 'react-router-dom';
-import { Flex } from 'rebass'
+import { observer } from 'mobx-react';
 import Login from './views/Login/Login';
 import ListClient from './views/ListClient/ListClient';
+import Context from './stores/context';
+import {
+  PrivateRoute,
+  Header,
+  Main,
+} from './components'
 
 const App = () => {
+  const context = useContext(Context);
+  const { sessionStore } = context;
+
+  if (typeof sessionStore.auth !== 'undefined' && sessionStore.auth === null) {
+    return false;
+  }
+
   return (
-    <Flex flexWrap='wrap' justifyContent="center">
-      <Route exact path="/" component={Login} />
-      <Route exact path="/list-client" component={ListClient} />
-    </Flex>
+    <Fragment>
+
+      <Header />
+      <Main>
+        <Route exact path="/" component={Login} />
+        <PrivateRoute exact path="/list-client" component={ListClient} />
+      </Main>
+    </Fragment>
   );
 }
 
-export default App;
+export default observer(App);

@@ -1,6 +1,6 @@
 import axios from 'axios';
-import localforage from 'localforage';
-import removeCache from './remove-cache';
+// import localforage from 'localforage';
+// import removeCache from './remove-cache';
 
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 
@@ -39,8 +39,8 @@ const Request = (method = '', url = '', body = {}, headers = {}) => {
         }
 
         if (error.response.status === 401) {
-          localforage.clear();
-          removeCache();
+          // localforage.clear();
+          // removeCache();
           return reject(error);
         }
 

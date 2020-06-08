@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 import { observer } from 'mobx-react';
 import Login from './views/Login/Login';
 import Client from './views/Client/Client';
+import FormRegister from './views/FormRegister/FormRegister';
 import Context from './stores/context';
 import {
   PrivateRoute,
@@ -27,6 +28,7 @@ const App = () => {
       <Main>
         <Route exact path="/" component={Login} />
         <PrivateRoute exact path="/client" component={Client} />
+        <PrivateRoute exact path="/client-register" component={FormRegister} />
       </Main>
     </Fragment>
   );

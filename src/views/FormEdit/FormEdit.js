@@ -9,16 +9,12 @@ import {
   ClientStyle,
 } from '../../style';
 
-class Client extends Component {
+class FormEdit extends Component {
   render() {
     return (
-      <ClientStyle>
-        <ButtonAddClient />
-        <SearchClient />
-        <ListClient />
-      </ClientStyle>
+      <div>Editando o registro do cliente</div>
     );
   }
 }
 
-export default Client;
+export default FormEdit;

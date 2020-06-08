@@ -9,7 +9,16 @@ class SearchClient extends Component {
   render() {
     return (
       <SearchClientStyle>
-        <Label className="text-search-client">Busca do cliente</Label>
+        <div className="wrapper-select-find">
+          <Label className="text-search-client">Busca do cliente por</Label>
+          <select name="cars" id="cars">
+            <option value="name">Nome</option>
+            <option value="address">Endereço</option>
+            <option value="telephone">Telefone</option>
+            <option value="neighborhood">Bairro</option>
+          </select>
+        </div>
+
         <Input />
       </SearchClientStyle>
     );

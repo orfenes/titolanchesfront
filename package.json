@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
     "emotion-theming": "^10.0.27",
+    "formik": "^2.1.4",
     "localforage": "^1.7.3",
     "mobx": "^5.15.4",
     "mobx-persist": "^0.4.1",

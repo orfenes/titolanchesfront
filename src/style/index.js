@@ -3,7 +3,8 @@ import { Label } from './Label/Label';
 import { Main } from './Main/Main';
 import { LoginStyle } from './LoginStyle/LoginStyle';
 import { SearchClientStyle } from './SearchClientStyle/SearchClientStyle';
-import {ClientStyle } from './ClientStyle/ClientStyle';
+import { ClientStyle } from './ClientStyle/ClientStyle';
+import { ListClientStyle } from './ListClientStyle/ListClientStyle';
 
 export {
   Input,
@@ -12,4 +13,5 @@ export {
   LoginStyle,
   SearchClientStyle,
   ClientStyle,
+  ListClientStyle,
 }

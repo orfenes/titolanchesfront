@@ -3,7 +3,8 @@ import { PrivateRoute } from './PrivateRoute/PrivateRoute';
 import { SearchClient } from './SearchClient/SearchClient';
 import { ListClient } from './ListClient/ListClient';
 import { ButtonAddClient } from './ButtonAddClient/ButtonAddClient';
-import { Form } from './Form/Form';
+import { FormClient } from './FormClient/FormClient';
+import { ShowErros } from './FormClient/ShowErros';
 
 export {
   Header,
@@ -11,5 +12,6 @@ export {
   SearchClient,
   ListClient,
   ButtonAddClient,
-  Form,
+  FormClient,
+  ShowErros,
 }

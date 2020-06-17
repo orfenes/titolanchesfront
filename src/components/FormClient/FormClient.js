@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from 'rebass';
+import MaskedInput from 'react-text-mask'
 import {
   Input,
   Label,
@@ -17,6 +18,18 @@ const FormClient = (props) => {
     handleBlur,
     isSubmitting,
   } = infoLabel;
+
+  const mask = (userInput) => {
+    const numbers = userInput.match(/\d/g);
+    const hasThreeNumber = (numbers && numbers.length > 2);
+    const hasNumberNine = (hasThreeNumber && numbers[2] === "9");
+
+    if (hasNumberNine) {
+      return ['(', /[1-9]/, /[1-9]/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+    } else {
+      return ['(', /[1-9]/, /[1-9]/, ')', ' ', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+    }
+  }
 
   return(
     <FormStyle>
@@ -63,11 +76,14 @@ const FormClient = (props) => {
         </div>
         <div className="wrapper-input">
           <Label htmlFor="telephone">Telefone</Label>
-          <Input
-            id="telephone"
-            onChange={handleChange}
-            onBlur={handleBlur}
+          <MaskedInput
+            mask={mask(values.telephone)}
+            className="form-control"
             placeholder="Digite o numero de telefone"
+            guide={false}
+            id="telephone"
+            onBlur={handleBlur}
+            onChange={handleChange}
             value={values.telephone}
           />
         </div>

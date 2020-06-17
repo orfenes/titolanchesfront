@@ -17,6 +17,24 @@ const FormStyle = styled.div`
     margin-top: 30px;
   }
 
+  .form-control {
+    box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    display: block;
+    width: 100%;
+    padding: 8px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-size: inherit;
+    line-height: inherit;
+    border: 1px solid;
+    border-radius: 4px;
+    color: inherit;
+    background-color: transparent;
+  }
+
   .bt {
     width: 100%;
     margin: 0px 3px;

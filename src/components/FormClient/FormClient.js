@@ -92,7 +92,7 @@ const FormClient = (props) => {
             className="bt"
             type="button"
             onClick={() => {
-              console.log('cancelando')
+              window.location = "/client";
             }}
           >
             Cancelar

@@ -7,11 +7,46 @@ import {
  import {
   FormRegisterStyle,
  } from '../../style';
+ import Context from '../../stores/context';
 
 class FormRegister extends Component {
+  static contextType = Context;
+
+  redirectPage() {
+    window.location = "/";
+  }
 
   postRegisterClient(values) {
-    console.log('Registrando o cliente')
+    const {
+      clientStore,
+      appStore,
+      modalStore,
+    } = this.context;
+
+    const data = {
+      name: values.name,
+      address: values.address,
+      number: values.number,
+      neighborhood: values.neighborhood,
+      complement: values.complement,
+      telephone:  values.telephone.replace(/\D/gim, ''),
+    };
+
+    appStore.toggleloading(true);
+
+    clientStore.doRequestRegisterClient(data)
+      .then(() => {
+        appStore.toggleloading(false);
+        modalStore.title = "Cadastro realizado com sucesso";
+        modalStore.clearModalCallBack();
+        modalStore.toogleModalSucess(true);
+        modalStore.setModalCallback(this.redirectPage);
+      }).catch((err) => {
+        modalStore.title = "Ocorreu um erro no cadastro do cliente";
+        modalStore.clearModalCallBack();
+        modalStore.toogleModalSucess(true);
+        appStore.toggleloading(false);
+      });
   }
 
   showErros(values, i18n) {

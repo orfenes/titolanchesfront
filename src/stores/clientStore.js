@@ -1,10 +1,19 @@
 import { action, decorate, observable } from 'mobx';
-import { getListClient as getListClientApi } from '../service/api';
+import {
+  getListClient as getListClientApi,
+  postRegisterCliente as postRegisterClienteApi,
+  deleteRegisterCliente as deleteRegisterClienteApi,
+} from '../service/api';
 
 class ClientStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.listClient = [];
+    this.client = '';
+  }
+
+  setClient(id) {
+    this.client = id;
   }
 
   setListClient(listClient) {
@@ -24,12 +33,45 @@ class ClientStore {
 
     return new Promise((resolve, reject) => promiseLogin(resolve, reject));
   }
+
+  doRequestRegisterClient(data) {
+    const promiseLogin = async (resolve, reject) => {
+      try {
+        const res = await postRegisterClienteApi({
+          body: data,
+        }, this.rootStore.sessionStore.token);
+        resolve(res.data);
+      } catch (err) {
+        reject(err);
+      }
+    };
+
+    return new Promise((resolve, reject) => promiseLogin(resolve, reject));
+  }
+
+  doRequestRemoveClient(data) {
+    const promiseLogin = async (resolve, reject) => {
+      try {
+        const res = await deleteRegisterClienteApi({
+          id: data,
+        }, this.rootStore.sessionStore.token);
+        resolve(res.data);
+      } catch (err) {
+        reject(err);
+      }
+    };
+
+    return new Promise((resolve, reject) => promiseLogin(resolve, reject));
+  }
 }
+
 
 decorate(ClientStore, {
   listClient: observable,
-  setListClient: action,
+  client: observable,
+  setClient: action,
   doRequestListClient: action,
+  doRequestRemoveClient: action,
 });
 
 export default ClientStore;

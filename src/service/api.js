@@ -25,3 +25,31 @@ export const getListClient = (params, token) => (
   )
 );
 
+export const postRegisterCliente = (params, token) => {
+  return request(
+    'POST',
+    `${pathPrivate}`,
+    params.body,
+    authToken(token),
+  );
+};
+
+export const deleteRegisterCliente = (params, token) => {
+  return request(
+    'DELETE',
+    `${pathPrivate}/${params.id}`,
+    {},
+    authToken(token),
+  );
+};
+
+export const getClient = (params, token) => {
+  return request(
+    'GET',
+    `${pathPrivate}/${params.id}`,
+    {},
+    authToken(token),
+  );
+};
+
+

@@ -25,14 +25,19 @@ class Login extends Component {
   login() {
     const {
       sessionStore,
+      appStore,
     } = this.context;
     const { email, password } = this.state;
+
+    appStore.toggleloading(true);
 
     sessionStore.doRequestLogin(email, password)
       .then(() => {
         this.setState({login: true});
+        appStore.toggleloading(false);
       })
       .catch((error) => {
+        appStore.toggleloading(false);
         this.setState({
           error: true,
           msg: error.data.errors[0],

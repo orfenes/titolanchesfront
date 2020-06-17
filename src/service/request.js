@@ -1,5 +1,5 @@
 import axios from 'axios';
-// import localforage from 'localforage';
+import localforage from 'localforage';
 // import removeCache from './remove-cache';
 
 axios.defaults.headers.common['Content-Type'] = 'application/json';
@@ -38,9 +38,9 @@ const Request = (method = '', url = '', body = {}, headers = {}) => {
           return reject(new Error('networkoffline'));
         }
 
-        if (error.response.status === 401) {
-          // localforage.clear();
-          // removeCache();
+        if (error.response.status === 403) {
+          localforage.clear();
+          window.location.href = "/";
           return reject(error);
         }
 

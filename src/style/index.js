@@ -9,6 +9,7 @@ import { Text } from './Text/Text';
 import { FlexDiv } from './FlexDiv/FlexDiv';
 import { FormStyle } from './FormStyle/FormStyle';
 import { FormRegisterStyle } from './FormRegisterStyle/FormRegisterStyle';
+import { ModalWrapper } from './ModalWrapper/ModalWrapper';
 
 export {
   Input,
@@ -22,4 +23,5 @@ export {
   FlexDiv,
   FormStyle,
   FormRegisterStyle,
+  ModalWrapper,
 }

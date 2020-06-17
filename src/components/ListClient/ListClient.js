@@ -13,21 +13,73 @@ class ListClient extends Component {
     super(props);
     this.getListClient = this.getListClient.bind(this);
     this.renderListClient = this.renderListClient.bind(this);
+    this.redirectPage = this.redirectPage.bind(this);
+    this.editClient = this.editClient.bind(this);
   }
 
   componentDidMount() {
     this.getListClient();
   }
 
+  redirectPage() {
+    this.getListClient();
+  }
+
   getListClient = async () => {
     const {
       clientStore,
+      appStore,
+      modalStore,
     } = this.context;
+
+    modalStore.toogleModalSucess(false);
+    appStore.toggleloading(true);
 
     try {
       await clientStore.doRequestListClient();
+      appStore.toggleloading(false);
     } catch (err) {
-      console.log('deu muito ruim', err);
+      appStore.toggleloading(false);
+      modalStore.title = "Nao foi possivel carregar lista de cliente";
+      modalStore.clearModalCallBack();
+      modalStore.toogleModalSucess(true);
+    }
+  }
+
+  editClient(client) {
+    const {
+      clientStore,
+    } = this.context;
+    // const {
+    //   history,
+    // } = this.state;
+
+    // clientStore.setClient(client);
+    // history.push()
+  }
+
+  removeClient = async (id) => {
+    const {
+      clientStore,
+      appStore,
+      modalStore,
+    } = this.context;
+
+    modalStore.toogleModalSucess(false);
+    appStore.toggleloading(true);
+
+    try {
+      await clientStore.doRequestRemoveClient(id);
+      appStore.toggleloading(false);
+      modalStore.title = "Cadastro do cliente removido com sucesso";
+      modalStore.clearModalCallBack();
+      modalStore.setModalCallback(this.redirectPage);
+      modalStore.toogleModalSucess(true);
+    } catch (err) {
+      appStore.toggleloading(false);
+      modalStore.title = "Nao foi possivel remover o cadastro desse cliente";
+      modalStore.clearModalCallBack();
+      modalStore.toogleModalSucess(true);
     }
   }
 
@@ -50,8 +102,8 @@ class ListClient extends Component {
             <div className="fone">Telefone: {client.telephone}</div>
           </div>
           <div className="wrapper-buttons">
-            <Button className="bt">Editar</Button>
-            <Button className="bt">Excluir</Button>
+            <Button className="bt" onClick={() => {this.editClient(client)}}>Editar</Button>
+            <Button className="bt" onClick={() => {this.removeClient(client._id)}}>Excluir</Button>
           </div>
         </li>
       );

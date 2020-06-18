@@ -4,6 +4,7 @@ import {
   postRegisterCliente as postRegisterClienteApi,
   deleteRegisterCliente as deleteRegisterClienteApi,
   postUpddateRegisterCliente as postUpddateRegisterClienteApi,
+  getFindClient as getFindClientApi,
 } from '../service/api';
 
 class ClientStore {
@@ -19,6 +20,22 @@ class ClientStore {
 
   setListClient(listClient) {
     this.listClient = listClient;
+  }
+
+  doRequestFindClient(params) {
+    const promiseLogin = async (resolve, reject) => {
+      try {
+        const res = await getFindClientApi({
+          url: params.url,
+        }, this.rootStore.sessionStore.token);
+        this.setListClient(res.data);
+        resolve(res.data);
+      } catch (err) {
+        reject(err);
+      }
+    };
+
+    return new Promise((resolve, reject) => promiseLogin(resolve, reject));
   }
 
   doRequestListClient(params) {

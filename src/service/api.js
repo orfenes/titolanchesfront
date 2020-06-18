@@ -16,14 +16,23 @@ export const login = params => (
   request('POST', `${pathLogin}/login`, params)
 );
 
-export const getListClient = (params, token) => (
-  request(
+export const getListClient = (params, token) => {
+  return request(
     'GET',
     `${pathPrivate}`,
     {},
     authToken(token),
   )
-);
+};
+
+export const getFindClient = (params, token) => {
+  return request(
+    'GET',
+    `${pathPrivate}?${params.url}`,
+    {},
+    authToken(token),
+  )
+};
 
 export const postRegisterCliente = (params, token) => {
   return request(

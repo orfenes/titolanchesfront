@@ -6,7 +6,6 @@ import {
   Label,
   FormStyle,
 } from '../../style';
-import { ConsoleWriter } from 'istanbul-lib-report';
 
 
 const FormClient = (props) => {

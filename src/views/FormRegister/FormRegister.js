@@ -11,9 +11,18 @@ import {
 
 class FormRegister extends Component {
   static contextType = Context;
+  constructor(props) {
+    super(props);
+    this.postRegisterClient = this.postRegisterClient.bind(this);
+    this.redirectPage = this.redirectPage.bind(this);
+  }
 
   redirectPage() {
-    window.location = "/";
+    const {
+      history,
+    } = this.props;
+
+   history.push("/");
   }
 
   postRegisterClient(values) {

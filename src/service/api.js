@@ -34,6 +34,15 @@ export const postRegisterCliente = (params, token) => {
   );
 };
 
+export const postUpddateRegisterCliente = (params, token) => {
+  return request(
+    'PUT',
+    `${pathPrivate}/${params.id}`,
+    params.body,
+    authToken(token),
+  );
+};
+
 export const deleteRegisterCliente = (params, token) => {
   return request(
     'DELETE',

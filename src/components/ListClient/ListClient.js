@@ -15,6 +15,7 @@ class ListClient extends Component {
     this.renderListClient = this.renderListClient.bind(this);
     this.redirectPage = this.redirectPage.bind(this);
     this.editClient = this.editClient.bind(this);
+    this.formatNumber = this.formatNumber.bind(this);
   }
 
   componentDidMount() {
@@ -46,16 +47,13 @@ class ListClient extends Component {
     }
   }
 
-  editClient(client) {
+  editClient(client, history) {
     const {
       clientStore,
     } = this.context;
-    // const {
-    //   history,
-    // } = this.state;
 
-    // clientStore.setClient(client);
-    // history.push()
+    clientStore.setClient(client);
+    history.push("/client-edit");
   }
 
   removeClient = async (id) => {
@@ -83,11 +81,26 @@ class ListClient extends Component {
     }
   }
 
-  renderListClient() {
+  formatNumber(telephone) {
+    const current  = telephone.toString();
+    let result = '';
+
+    if(current.length > 10) {
+      const match = current.match(/^(\d{2})(\d{5})(\d{4})$/);
+      result =  '(' + match[1] + ') ' + match[2] + '-' + match[3];
+    } else {
+      const match = current.match(/^(\d{2})(\d{4})(\d{4})$/);
+      result =  '(' + match[1] + ') ' + match[2] + '-' + match[3];
+    }
+
+    return result
+  }
+
+  renderListClient(history) {
     const {
       clientStore,
     } = this.context;
-    console.log(clientStore.listClient);
+
     return clientStore.listClient.map((client, index) => {
       return (
         <li key={index} className="item-client">
@@ -99,10 +112,10 @@ class ListClient extends Component {
               <p className="info-client">Complemento: {client.complement}</p>
               <p className="info-client">Bairro: {client.neighborhood}</p>
             </div>
-            <div className="fone">Telefone: {client.telephone}</div>
+            <div className="fone">Telefone: {this.formatNumber(client.telephone)}</div>
           </div>
           <div className="wrapper-buttons">
-            <Button className="bt" onClick={() => {this.editClient(client)}}>Editar</Button>
+            <Button className="bt" onClick={() => {this.editClient(client, history)}}>Editar</Button>
             <Button className="bt" onClick={() => {this.removeClient(client._id)}}>Excluir</Button>
           </div>
         </li>
@@ -112,9 +125,13 @@ class ListClient extends Component {
 
 
   render() {
+    const {
+      history,
+    } = this.props;
+
     return (
       <ListClientStyle>
-        {this.renderListClient()}
+        {this.renderListClient(history)}
       </ListClientStyle>
     );
   }

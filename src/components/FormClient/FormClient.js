@@ -6,6 +6,7 @@ import {
   Label,
   FormStyle,
 } from '../../style';
+import { ConsoleWriter } from 'istanbul-lib-report';
 
 
 const FormClient = (props) => {
@@ -19,11 +20,21 @@ const FormClient = (props) => {
     isSubmitting,
   } = infoLabel;
 
-  const mask = (userInput) => {
-    const numbers = userInput.match(/\d/g);
-    const hasThreeNumber = (numbers && numbers.length > 2);
-    const hasNumberNine = (hasThreeNumber && numbers[2] === "9");
+  const tratamentTypeDataTelephone = (userInput) => {
+    const hasString = !!(userInput.length);
 
+    if (hasString) {
+      const numbers = userInput.match(/\d/g);
+      const hasThreeNumber = (numbers && numbers.length > 2);
+      return (hasThreeNumber && numbers[2] === "9");
+    }
+
+    const phone = userInput.toString();
+    return (phone.length > 10) ? true : false;
+  }
+
+  const mask = (userInput) => {
+    const hasNumberNine = tratamentTypeDataTelephone(userInput)
     if (hasNumberNine) {
       return ['(', /[1-9]/, /[1-9]/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
     } else {
@@ -34,6 +45,11 @@ const FormClient = (props) => {
   return(
     <FormStyle>
       <div className="wrapper">
+        <input
+          type="hidden"
+          id="id"
+          value={values.id}
+        />
         <div className="wrapper-input">
           <Label htmlFor="nome">Nome</Label>
           <Input

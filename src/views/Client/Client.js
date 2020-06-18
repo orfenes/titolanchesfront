@@ -11,11 +11,15 @@ import {
 
 class Client extends Component {
   render() {
+    const {
+      history,
+    } = this.props;
+
     return (
       <ClientStyle>
         <ButtonAddClient />
         <SearchClient />
-        <ListClient />
+        <ListClient history={history}/>
       </ClientStyle>
     );
   }

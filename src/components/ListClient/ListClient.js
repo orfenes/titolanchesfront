@@ -93,7 +93,7 @@ class ListClient extends Component {
       result =  '(' + match[1] + ') ' + match[2] + '-' + match[3];
     }
 
-    return result
+    return result;
   }
 
   renderListClient(history) {
@@ -101,7 +101,7 @@ class ListClient extends Component {
       clientStore,
     } = this.context;
 
-    return clientStore.listClient.map((client, index) => {
+    return clientStore.getListClientData.map((client, index) => {
       return (
         <li key={index} className="item-client">
           <div className="wrapper-info-client">

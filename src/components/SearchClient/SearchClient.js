@@ -13,48 +13,25 @@ class SearchClient extends Component {
     super(props);
     this.selectedFilter = this.selectedFilter.bind(this);
     this.insertText = this.insertText.bind(this);
-    this.findList = this.findList.bind(this);
-    this.state = {
-      typeFind: 'name',
-      textInput: '',
-    }
   }
 
   selectedFilter(event) {
-    this.setState({typeFind: event.target.value});
-  }
-
-  insertText(event) {
-    this.setState({textInput: event.target.value});
+    const {
+      clientStore,
+    } = this.context;
+    clientStore.searchFilter = event.target.value;
   }
 
   findList() {
+    console.log('buscando dados');
+  }
+
+  insertText(event) {
     const {
       clientStore,
-      appStore,
-      modalStore,
     } = this.context;
 
-    const {
-      typeFind,
-      textInput
-    } = this.state;
-
-    const params = {
-      url: `${typeFind}__regex=/${textInput}/`,
-    };
-
-    appStore.toggleloading(true);
-
-    clientStore.doRequestFindClient(params)
-      .then(() => {
-        appStore.toggleloading(false);
-      }).catch((err) => {
-        modalStore.title = "Ocorreu um erro na busca do cliente";
-        modalStore.clearModalCallBack();
-        modalStore.toogleModalSucess(true);
-        appStore.toggleloading(false);
-      });
+    clientStore.searchValue = event.target.value;
   }
 
 
@@ -72,7 +49,6 @@ class SearchClient extends Component {
         </div>
 
         <Input onChange={this.insertText} />
-        <button onClick={this.findList}>Pesquisar</button>
       </SearchClientStyle>
     );
   }

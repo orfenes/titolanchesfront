@@ -25,15 +25,6 @@ export const getListClient = (params, token) => {
   )
 };
 
-export const getFindClient = (params, token) => {
-  return request(
-    'GET',
-    `${pathPrivate}?${params.url}`,
-    {},
-    authToken(token),
-  )
-};
-
 export const postRegisterCliente = (params, token) => {
   return request(
     'POST',

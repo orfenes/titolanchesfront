@@ -78,6 +78,24 @@ class FormEdit extends Component {
     appStore.toggleloading(true);
   }
 
+
+  validateTelephone(number) {
+    const hasTelephone = number;
+    const formatString = !!(number && number.length);
+
+    if(hasTelephone === false) return false;
+
+    // caso seja string
+    if(formatString) {
+      const telephone = number.replace(/\D/gim, '');
+      return telephone && (telephone.length < 9);
+    }
+
+    // caso seja numero
+    const numberString = number.toString();
+    return (numberString.length < 9);
+  }
+
   showErros(values, i18n) {
     const errors = {};
 
@@ -93,7 +111,9 @@ class FormEdit extends Component {
 
     if (!values.telephone) {
       errors.telephone = 'Campo de telefone é obrigatorio';
-    }
+    } else if(this.validateTelephone(values.telephone)) {
+      errors.telephone = 'Telefone invalido';
+    };
 
     return errors;
   }

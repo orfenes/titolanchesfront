@@ -58,7 +58,16 @@ class FormRegister extends Component {
       });
   }
 
-  showErros(values, i18n) {
+  validateTelephone(number) {
+    if(number) {
+      const telephone = number.replace(/\D/gim, '');
+      return telephone && (telephone.length < 9);
+    }
+
+    return false;
+  }
+
+  showErros(values) {
     const errors = {};
 
     if (!values.name) {
@@ -73,7 +82,9 @@ class FormRegister extends Component {
 
     if (!values.telephone) {
       errors.telephone = 'Campo de telefone é obrigatorio';
-    }
+    } else if(this.validateTelephone(values.telephone)) {
+      errors.telephone = 'Telefone invalido';
+    };
 
     return errors;
   }

@@ -12,6 +12,7 @@
     "client-persist": "^1.8.6",
     "emotion-theming": "^10.0.27",
     "formik": "^2.1.4",
+    "fuse.js": "^6.2.0",
     "localforage": "^1.7.3",
     "mobx": "^5.15.4",
     "mobx-persist": "^0.4.1",

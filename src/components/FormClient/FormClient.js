@@ -6,6 +6,7 @@ import {
   Label,
   FormStyle,
 } from '../../style';
+import { Textarea } from '@rebass/forms';
 
 
 const FormClient = (props) => {
@@ -77,6 +78,16 @@ const FormClient = (props) => {
             onBlur={handleBlur}
             placeholder="Digite o numero"
             value={values.number}
+          />
+        </div>
+        <div className="wrapper-input">
+          <Label htmlFor="number">Complemento</Label>
+          <Textarea
+            id="complement"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            placeholder=""
+            value={values.complement}
           />
         </div>
         <div className="wrapper-input">

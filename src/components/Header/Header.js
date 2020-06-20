@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
+import localforage from 'localforage';
 import Context from '../../stores/context';
 import {
   Flex,
@@ -23,12 +24,27 @@ const Header = () => {
     sessionStore
   } = context;
 
+  const removeCache = () => {
+    localforage.clear();
+    window.location.href = "/";
+  }
+
   const renderName = () => {
     if(sessionStore.auth) {
       return 'TitoLanches';
     }
 
     return 'Login';
+  }
+
+  const renderLogout = () => {
+    if(sessionStore.auth) {
+      return (
+        <Box mx='auto'ontWeight='bold' onClick={removeCache}>SAIR</Box>
+      );
+    }
+
+    return false;
   }
 
   return(
@@ -40,7 +56,7 @@ const Header = () => {
       <Text p={2} fontWeight='bold' className="text-login">
         {renderName()}
       </Text>
-      <Box mx='auto' />
+      {renderLogout()}
     </HeaderStyle>
   );
 };

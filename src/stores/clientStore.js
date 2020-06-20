@@ -13,7 +13,7 @@ class ClientStore {
     this.listClient = [];
     this.client = {};
     this.searchValue = '';
-    this.searchFilter = 'name'
+    this.searchFilter = 'telephone'
   }
 
   setClient(client) {

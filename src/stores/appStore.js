@@ -12,12 +12,7 @@ class AppStore {
   }
 
   clearALlCache() {
-    window.sessionStorage.removeItem('localforage/program');
-    window.sessionStorage.removeItem('localforage/people');
-    window.sessionStorage.removeItem('localforage/training-creation');
-    window.sessionStorage.removeItem('localforage/build-training');
-    window.sessionStorage.removeItem('localforage/add-exercises');
-    window.sessionStorage.removeItem('localforage/teacherTrainingStore');
+    window.sessionStorage.removeItem('localforage/client');
   }
 }
 

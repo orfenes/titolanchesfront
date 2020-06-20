@@ -22,10 +22,6 @@ class SearchClient extends Component {
     clientStore.searchFilter = event.target.value;
   }
 
-  findList() {
-    console.log('buscando dados');
-  }
-
   insertText(event) {
     const {
       clientStore,
@@ -41,9 +37,9 @@ class SearchClient extends Component {
         <div className="wrapper-select-find">
           <Label className="text-search-client">Busca do cliente por</Label>
           <select name="cars" id="cars" onChange={this.selectedFilter}>
+            <option value="telephone">Telefone</option>
             <option value="name">Nome</option>
             <option value="address">Endereço</option>
-            <option value="telephone">Telefone</option>
             <option value="neighborhood">Bairro</option>
           </select>
         </div>

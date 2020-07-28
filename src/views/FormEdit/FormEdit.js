@@ -87,11 +87,20 @@ class FormEdit extends Component {
 
     // caso seja string
     if(formatString) {
+      console.log('primeiro')
       const telephone = number.replace(/\D/gim, '');
-      return telephone && (telephone.length < 9);
+      const numbers = telephone.toString();
+      const hasThreeNumber = (numbers && numbers.length > 2);
+
+      if(hasThreeNumber && numbers[2] === "9") {
+        return telephone && (telephone.length < 11);
+      }
+
+      return telephone && (telephone.length < 10);
     }
 
     // caso seja numero
+    console.log('segundo');
     const numberString = number.toString();
     return (numberString.length < 9);
   }

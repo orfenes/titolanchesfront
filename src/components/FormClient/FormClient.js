@@ -26,6 +26,7 @@ const FormClient = (props) => {
     if (hasString) {
       const numbers = userInput.match(/\d/g);
       const hasThreeNumber = (numbers && numbers.length > 2);
+
       return (hasThreeNumber && numbers[2] === "9");
     }
 

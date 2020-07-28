@@ -84,14 +84,22 @@ class ListClient extends Component {
   formatNumber(telephone) {
     const current  = telephone.toString();
     let result = '';
+    try {
+      if(current.length > 10) {
+        const match = current.match(/^(\d{2})(\d{5})(\d{4})$/);
+        result =  '(' + match[1] + ') ' + match[2] + '-' + match[3];
+      } else {
+        const match = current.match(/^(\d{2})(\d{4})(\d{4})$/);
 
-    if(current.length > 10) {
-      const match = current.match(/^(\d{2})(\d{5})(\d{4})$/);
-      result =  '(' + match[1] + ') ' + match[2] + '-' + match[3];
-    } else {
-      const match = current.match(/^(\d{2})(\d{4})(\d{4})$/);
-      result =  '(' + match[1] + ') ' + match[2] + '-' + match[3];
+        if(match === null) {
+          return telephone;
+        }
+        result =  '(' + match[1] + ') ' + match[2] + '-' + match[3];
+      }
+    } catch {
+      console.log('erro no numero de telefone');
     }
+
 
     return result;
   }

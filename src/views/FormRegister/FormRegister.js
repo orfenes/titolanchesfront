@@ -61,7 +61,14 @@ class FormRegister extends Component {
   validateTelephone(number) {
     if(number) {
       const telephone = number.replace(/\D/gim, '');
-      return telephone && (telephone.length < 9);
+      const numbers = telephone.toString();
+      const hasThreeNumber = (numbers && numbers.length > 2);
+
+      if(hasThreeNumber && numbers[2] === "9") {
+        return telephone && (telephone.length < 11);
+      }
+
+      return telephone && (telephone.length < 10);
     }
 
     return false;
